@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sunnyweather.android.MainActivity
 import com.sunnyweather.android.R
 import com.sunnyweather.android.ui.weather.WeatherActivity
 
@@ -34,8 +35,8 @@ class PlaceFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //如果已经存储了相关的城市信息，则获取数据并解析成Place对象
-        if (viewModel.isPlaceSave()){
+        //当PlaceFragment嵌入MainActivity， 并且如果已经存储了相关的城市信息，则获取数据并解析成Place对象
+        if (activity is MainActivity && viewModel.isPlaceSave()){
             val place = viewModel.getSavedPlace()
             val intent = Intent(context,WeatherActivity::class.java).apply {
                 putExtra("location_lng",place.location.lng)
